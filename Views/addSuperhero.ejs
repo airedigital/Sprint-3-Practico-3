@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= typeof titulo !== 'undefined' ? titulo : 'Agregar superhéroe' %></title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { margin-top: 0; }
+    label { display:block; margin-top: 10px; font-weight: bold; }
+    input, textarea { width: 100%; max-width: 520px; padding: 6px; }
+    textarea { min-height: 90px; }
+    .errores { border: 1px solid #f5c2c7; background: #f8d7da; padding: 10px; margin: 10px 0; }
+    .acciones { margin-top: 12px; }
+  </style>
+</head>
+<body>
+  <h1><%= typeof titulo !== 'undefined' ? titulo : 'Agregar superhéroe' %></h1>
+  <p><a href="/dashboard">Volver al listado</a></p>
+
+  <% var errs = (typeof errores !== 'undefined' && Array.isArray(errores)) ? errores : []; %>
+  <% var val = (typeof valores !== 'undefined' && valores !== null && typeof valores === 'object') ? valores : {}; %>
+
+  <% if (errs.length > 0) { %>
+    <div class="errores">
+      <strong>Revisá los datos</strong>
+      <ul>
+        <% errs.forEach(function (e) { %>
+          <li><%= e %></li>
+        <% }); %>
+      </ul>
+    </div>
+  <% } %>
+
+  <form action="/heroes/agregar" method="post">
+    <label for="nombreSuperHeroe">Nombre de superhéroe *</label>
+    <input type="text" id="nombreSuperHeroe" name="nombreSuperHeroe" required minlength="3" maxlength="60"
+      value="<%= val.nombreSuperHeroe != null ? val.nombreSuperHeroe : '' %>">
+
+    <label for="nombreReal">Nombre real *</label>
+    <input type="text" id="nombreReal" name="nombreReal" required minlength="3" maxlength="60"
+      value="<%= val.nombreReal != null ? val.nombreReal : '' %>">
+
+    <label for="edad">Edad *</label>
+    <input type="number" id="edad" name="edad" required min="0" step="1"
+      value="<%= val.edad != null ? val.edad : '' %>">
+
+    <label for="planetaOrigen">Planeta de origen</label>
+    <input type="text" id="planetaOrigen" name="planetaOrigen" maxlength="80"
+      value="<%= val.planetaOrigen != null ? val.planetaOrigen : '' %>"
+      placeholder="Vacío = Desconocido">
+
+    <label for="debilidad">Debilidad</label>
+    <input type="text" id="debilidad" name="debilidad" maxlength="200"
+      value="<%= val.debilidad != null ? val.debilidad : '' %>">
+
+    <label for="poderes">Poderes *</label>
+    <textarea id="poderes" name="poderes" rows="4" required minlength="3"><%= val.poderes != null ? val.poderes : '' %></textarea>
+
+    <label for="aliados">Aliados</label>
+    <textarea id="aliados" name="aliados" rows="2"><%= val.aliados != null ? val.aliados : '' %></textarea>
+
+    <label for="enemigos">Enemigos</label>
+    <textarea id="enemigos" name="enemigos" rows="2"><%= val.enemigos != null ? val.enemigos : '' %></textarea>
+
+    <label for="creador">Creador</label>
+    <input type="text" id="creador" name="creador" maxlength="120"
+      value="<%= val.creador != null ? val.creador : '' %>">
+
+    <div class="acciones">
+      <button type="submit">Guardar</button>
+    </div>
+  </form>
+</body>
+</html>

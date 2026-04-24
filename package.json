@@ -1,0 +1,13 @@
+{
+  "name": "tp3-mvc",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node app.mjs"
+  },
+  "dependencies": {
+    "ejs": "^5.0.2",
+    "express": "^4.21.0",
+    "mongoose": "^8.9.0"
+  }
+}

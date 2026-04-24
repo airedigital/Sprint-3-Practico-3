@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@SRC/*": ["SRC/*"]
+    }
+  },
+  "include": ["SRC/**/*.mjs", "SRC/**/*.js"]
+}

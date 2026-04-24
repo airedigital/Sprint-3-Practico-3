@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <% var listaHeroes = (typeof heroes !== 'undefined' && Array.isArray(heroes)) ? heroes : []; %>
+  <% var tituloPagina = typeof titulo !== 'undefined' ? titulo : 'Superhéroes'; %>
+  <title><%= tituloPagina %></title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { margin-top: 0; }
+    table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; vertical-align: top; }
+    th { background: #f2f2f2; }
+    a { color: #0b5ed7; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .acciones a { margin-right: 8px; }
+  </style>
+</head>
+<body>
+  <h1><%= tituloPagina %></h1>
+  <p><a href="/heroes/agregar">Agregar superhéroe</a></p>
+
+  <% if (listaHeroes.length === 0) { %>
+    <p>No hay superhéroes para mostrar.</p>
+  <% } else { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Nombre real</th>
+          <th>Edad</th>
+          <th>Planeta</th>
+          <th>Poderes</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% listaHeroes.forEach(function (h) { %>
+          <tr>
+            <td><strong><%= h.Nombre %></strong></td>
+            <td><%= h['Nombre Real'] %></td>
+            <td><%= h.Edad %></td>
+            <td><%= h['Planeta de Origen'] %></td>
+            <td>
+              <% if (h.Poderes && h.Poderes.length > 0) { %>
+                <ul>
+                  <% h.Poderes.forEach(function (p) { %>
+                    <li><%= p %></li>
+                  <% }); %>
+                </ul>
+              <% } else { %>
+                —
+              <% } %>
+            </td>
+            <td class="acciones">
+              <% if (typeof h._id !== 'undefined' && h._id) { %>
+                <a href="/heroes/<%= h._id %>/editar">Editar</a>
+                <a href="/heroes/<%= h._id %>/eliminar">Eliminar</a>
+              <% } else { %>
+                —
+              <% } %>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } %>
+</body>
+</html>

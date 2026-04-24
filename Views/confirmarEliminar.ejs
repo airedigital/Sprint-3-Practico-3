@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Eliminar superhéroe</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { margin-top: 0; }
+    .acciones { margin-top: 12px; }
+    a { color: #0b5ed7; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { padding: 6px 10px; }
+  </style>
+</head>
+<body>
+  <h1>Eliminar superhéroe</h1>
+  <p><a href="/dashboard">Cancelar</a></p>
+
+  <p>¿Confirmás que querés eliminar a <strong><%= typeof nombre !== 'undefined' ? nombre : '' %></strong>?</p>
+  <p>Esta acción no se puede deshacer.</p>
+
+  <form class="acciones" method="post" action="/heroes/<%= typeof idHeroe !== 'undefined' ? idHeroe : '' %>/eliminar">
+    <button type="submit">Sí, eliminar</button>
+    <a href="/dashboard" style="margin-left: 10px;">No, volver</a>
+  </form>
+</body>
+</html>
